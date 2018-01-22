@@ -14,10 +14,7 @@ const cardValues = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
  *   - add each card's HTML to the page
  */
 const deck = document.querySelector('.deck');
-while (deck.firstChild) {
-    //The list is LIVE so it will re-index each call
-    deck.removeChild(deck.firstChild);
-}
+
 shuffle(cardValues);
 for (let cardValue of cardValues) {
     let li = document.createElement("li");
