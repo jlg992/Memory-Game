@@ -42,6 +42,11 @@ function shuffle(array) {
     return array;
 }
 
+//set up event listener for resetting page
+const repeatButton = document.querySelector('.fa-repeat');
+repeatButton.addEventListener('click', function(){
+    location.reload();
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
