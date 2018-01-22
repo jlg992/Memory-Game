@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
+const cardValues = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
                "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf",
                "fa fa-bicycle", "fa fa-diamond", "fa fa-bomb", "fa fa-leaf",
                "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle",
@@ -13,6 +13,18 @@ const cards = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+const deck = document.querySelector('.deck');
+while (deck.firstChild) {
+    //The list is LIVE so it will re-index each call
+    deck.removeChild(deck.firstChild);
+}
+shuffle(cardValues);
+for (let cardValue of cardValues) {
+    let li = document.createElement("li");
+    let i = document.createElement('i');
+    deck.appendChild(li).setAttribute("class", "card");
+    li.appendChild(i).setAttribute("class", cardValue);
+}
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
