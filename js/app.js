@@ -66,30 +66,48 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
- //Display the card's symbol
- function displaySymbol(e) {
-   if (e.target.matches("li.card") && (openCardsList.length < 2)) {
-     e.target.classList.add('show');
-     e.target.classList.add('open');
-   }
+//Display the card's symbol
+function displaySymbol(e) {
+ if (e.target.matches("li.card") && (openCardsList.length < 2)) {
+   e.target.classList.add('show');
+   e.target.classList.add('open');
  }
+}
 
- //Add cards to list of open cards
- let openCardsList = []; //list to hold open cards
- function addToList(e) {
-   if (e.target.matches("li.card") && (openCardsList.length < 2)) {
-     openCardsList.push(e.target);
-     //Check for matches
-     if (openCardsList.length === 2) {
-       if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
-          console.log("Match");
-       }
-       else {
-         console.log("No match.")
-       }
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+//Add cards to list of open cards
+let openCardsList = []; //list to hold open cards
+function addToList(e) {
+ if (e.target.matches("li.card") && (openCardsList.length < 2)) {
+   openCardsList.push(e.target);
+   //Check for matches
+   if (openCardsList.length === 2) {
+     if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
+        openCardsList[0].classList.add('match');
+        openCardsList[1].classList.add('match');
+     }
+     else {
+       //hide cards that don't match
+       setTimeout(function hideCards() {
+        openCardsList[0].classList.remove('show');
+        openCardsList[0].classList.remove('open');
+        openCardsList[1].classList.remove('show');
+        openCardsList[1].classList.remove('open');
+        //empty card list
+        openCardsList = [];
+      }, 1000);
      }
    }
  }
+}
 
 deck.addEventListener('click', function(e) {
   displaySymbol(e);
