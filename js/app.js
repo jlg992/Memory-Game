@@ -60,6 +60,7 @@ let openCardsList = []; //list to hold open cards
 function displaySymbol(e) {
   if (e.target.matches("li.card")) {
     e.target.classList.add('show');
+    e.target.classList.add('open');
     openCardsList.push(e.target);
     console.log(openCardsList);
   }
