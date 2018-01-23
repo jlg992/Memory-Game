@@ -74,14 +74,6 @@ function displaySymbol(e) {
  }
 }
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
 
 //Add cards to list of open cards
 let openCardsList = []; //list to hold open cards
