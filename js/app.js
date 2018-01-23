@@ -1,6 +1,9 @@
 // Select the ul for the cards
 const deck = document.querySelector('.deck');
 
+// Select button for reshuffling and laying out cards
+const repeatButton = document.querySelector('.fa-repeat');
+
 /*
  * Create a list that holds all of your cards
  */
@@ -53,7 +56,6 @@ function shuffle(array) {
 }
 
 //set up event listener for resetting deck layout
-const repeatButton = document.querySelector('.fa-repeat');
 repeatButton.addEventListener('click', function(){
     removeCards();
     layoutCards();
