@@ -94,6 +94,7 @@ function addToList(e) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
         //empty card list
+        addStars();
         numMoves++;
         numMovesDisplay.innerText = numMoves;
         openCardsList = [];
@@ -107,12 +108,20 @@ function addToList(e) {
         openCardsList[1].classList.remove('open');
         //empty card list
         numMoves++;
+        addStars();
         numMovesDisplay.innerText = numMoves;
         openCardsList = [];
       }, 1000);
      }
    }
  }
+}
+
+//Add Stars to display
+const starsPanel = document.querySelector(".stars");
+function addStars() {
+  let li = document.createElement("li");
+  starsPanel.appendChild(li).setAttribute("class", "fa fa-star");
 }
 
 //Display number of Moves
