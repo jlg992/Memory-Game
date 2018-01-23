@@ -1,3 +1,6 @@
+// Select the ul for the cards
+const deck = document.querySelector('.deck');
+
 /*
  * Create a list that holds all of your cards
  */
@@ -13,15 +16,25 @@ const cardValues = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-const deck = document.querySelector('.deck');
 
-shuffle(cardValues);
-for (let cardValue of cardValues) {
-    let li = document.createElement("li");
-    let i = document.createElement('i');
-    deck.appendChild(li).setAttribute("class", "card");
-    li.appendChild(i).setAttribute("class", cardValue);
+
+function layoutCards() {
+    shuffle(cardValues);
+    for (let cardValue of cardValues) {
+        let li = document.createElement("li");
+        let i = document.createElement('i');
+        deck.appendChild(li).setAttribute("class", "card");
+        li.appendChild(i).setAttribute("class", cardValue);
+    }
 }
+
+// Clear the cards
+function removeCards() {
+    while (deck.firstChild) {
+      deck.removeChild(deck.firstChild);
+    }
+}
+
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -39,10 +52,11 @@ function shuffle(array) {
     return array;
 }
 
-//set up event listener for resetting page
+//set up event listener for resetting deck layout
 const repeatButton = document.querySelector('.fa-repeat');
 repeatButton.addEventListener('click', function(){
-    location.reload();
+    removeCards();
+    layoutCards();
 });
 
 /*
@@ -55,3 +69,4 @@ repeatButton.addEventListener('click', function(){
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+layoutCards();
