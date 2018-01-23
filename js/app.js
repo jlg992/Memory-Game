@@ -56,11 +56,17 @@ function shuffle(array) {
 }
 
 //Display the card's symbol
-let openCardsList = []; //list to hold open cards
 function displaySymbol(e) {
   if (e.target.matches("li.card")) {
     e.target.classList.add('show');
     e.target.classList.add('open');
+  }
+}
+
+//Add cards to list of open cards
+let openCardsList = []; //list to hold open cards
+function addToList(e) {
+  if (e.target.matches("li.card")) {
     openCardsList.push(e.target);
     console.log(openCardsList);
   }
@@ -82,6 +88,7 @@ function displaySymbol(e) {
 
 deck.addEventListener('click', function(e) {
   displaySymbol(e);
+  addToList(e);
 });
 
 //set up event listener for resetting deck layout
