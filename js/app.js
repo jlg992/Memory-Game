@@ -55,11 +55,18 @@ function shuffle(array) {
     return array;
 }
 
+//Display the card's symbol
+let openCardsList = []; //list to hold open cards
 function displaySymbol(e) {
   if (e.target.matches("li.card")) {
     e.target.classList.add('show');
+    openCardsList.push(e.target);
+    console.log(openCardsList);
   }
 }
+
+
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -72,7 +79,9 @@ function displaySymbol(e) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-deck.addEventListener('click', displaySymbol);
+deck.addEventListener('click', function(e) {
+  displaySymbol(e);
+});
 
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
