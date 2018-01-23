@@ -93,6 +93,8 @@ function addToList(e) {
      if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
+        //empty card list
+        openCardsList = [];
      }
      else {
        //hide cards that don't match
