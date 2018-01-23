@@ -94,6 +94,8 @@ function addToList(e) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
         //empty card list
+        numMoves++;
+        numMovesDisplay.innerText = numMoves;
         openCardsList = [];
      }
      else {
@@ -104,12 +106,20 @@ function addToList(e) {
         openCardsList[1].classList.remove('show');
         openCardsList[1].classList.remove('open');
         //empty card list
+        numMoves++;
+        numMovesDisplay.innerText = numMoves;
         openCardsList = [];
       }, 1000);
      }
    }
  }
 }
+
+//Display number of Moves
+let numMovesDisplay = document.querySelector('.moves');
+numMoves = 0;
+numMovesDisplay.innerText = numMoves;
+
 
 deck.addEventListener('click', function(e) {
   displaySymbol(e);
@@ -119,6 +129,8 @@ deck.addEventListener('click', function(e) {
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
  openCardsList = [];
+ numMoves = 0;
+ numMovesDisplay.innerText = numMoves;
  removeCards();
  layoutCards();
 });
