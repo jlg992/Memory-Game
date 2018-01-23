@@ -55,26 +55,6 @@ function shuffle(array) {
     return array;
 }
 
-//Display the card's symbol
-function displaySymbol(e) {
-  if (e.target.matches("li.card")) {
-    e.target.classList.add('show');
-    e.target.classList.add('open');
-  }
-}
-
-//Add cards to list of open cards
-let openCardsList = []; //list to hold open cards
-function addToList(e) {
-  if (e.target.matches("li.card")) {
-    openCardsList.push(e.target);
-    console.log(openCardsList);
-  }
-}
-
-
-
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -85,6 +65,31 @@ function addToList(e) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+ //Display the card's symbol
+ function displaySymbol(e) {
+   if (e.target.matches("li.card") && (openCardsList.length < 2)) {
+     e.target.classList.add('show');
+     e.target.classList.add('open');
+   }
+ }
+
+ //Add cards to list of open cards
+ let openCardsList = []; //list to hold open cards
+ function addToList(e) {
+   if (e.target.matches("li.card") && (openCardsList.length < 2)) {
+     openCardsList.push(e.target);
+     //Check for matches
+     if (openCardsList.length === 2) {
+       if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
+          console.log("Match");
+       }
+       else {
+         console.log("No match.")
+       }
+     }
+   }
+ }
 
 deck.addEventListener('click', function(e) {
   displaySymbol(e);
