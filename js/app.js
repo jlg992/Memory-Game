@@ -85,6 +85,7 @@ deck.addEventListener('click', function(e) {
 
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
+ openCardsList = [];
  removeCards();
  layoutCards();
 });
