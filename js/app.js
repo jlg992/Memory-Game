@@ -96,10 +96,8 @@ function addToList(e) {
         if (matches === 8) {
            setTimeout(displayFinalScore, 1000);
         }
-        //empty card list
         addStars();
-        numMoves++;
-        numMovesDisplay.innerText = numMoves;
+        incrementMoves();
         openCardsList = [];
      }
      else {
@@ -109,10 +107,8 @@ function addToList(e) {
         openCardsList[0].classList.remove('open');
         openCardsList[1].classList.remove('show');
         openCardsList[1].classList.remove('open');
-        //empty card list
-        numMoves++;
         addStars();
-        numMovesDisplay.innerText = numMoves;
+        incrementMoves();
         openCardsList = [];
       }, 1000);
      }
@@ -132,6 +128,12 @@ function removeStars() {
    while (starsPanel.firstChild) {
      starsPanel.removeChild(starsPanel.firstChild);
  }
+}
+
+//Increment number of moves
+function incrementMoves() {
+   numMoves++;
+   numMovesDisplay.innerText = numMoves;
 }
 
 //Display number of Moves
