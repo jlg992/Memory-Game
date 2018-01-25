@@ -96,7 +96,6 @@ function addToList(e) {
         if (matches === 8) {
            setTimeout(displayFinalScore, 1000);
         }
-        addStars();
         incrementMoves();
         openCardsList = [];
      }
@@ -107,7 +106,6 @@ function addToList(e) {
         openCardsList[0].classList.remove('open');
         openCardsList[1].classList.remove('show');
         openCardsList[1].classList.remove('open');
-        addStars();
         incrementMoves();
         openCardsList = [];
       }, 1000);
@@ -116,19 +114,9 @@ function addToList(e) {
  }
 }
 
-//Add Stars to display
-const starsPanel = document.querySelector(".stars");
-function addStars() {
-  let li = document.createElement("li");
-  starsPanel.appendChild(li).setAttribute("class", "fa fa-star");
-}
 
-//Remove Stars from display
-function removeStars() {
-   while (starsPanel.firstChild) {
-     starsPanel.removeChild(starsPanel.firstChild);
- }
-}
+
+
 
 //Increment number of moves
 function incrementMoves() {
@@ -154,7 +142,6 @@ repeatButton.addEventListener('click', function(){
  numMoves = 0;
  numMovesDisplay.innerText = numMoves;
  removeCards();
- removeStars();
  layoutCards();
 });
 
