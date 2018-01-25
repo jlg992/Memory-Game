@@ -1,3 +1,6 @@
+//Keep track of number of matches
+let matches = 0;
+
 // Select the ul for the cards
 const deck = document.querySelector('.deck');
 
@@ -42,7 +45,7 @@ function removeCards() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -74,6 +77,10 @@ function displaySymbol(e) {
  }
 }
 
+//Display Final score
+function displayFinalScore() {
+   alert(`You matched all the cards in ${numMoves} moves.`)
+}
 
 //Add cards to list of open cards
 let openCardsList = []; //list to hold open cards
@@ -85,6 +92,10 @@ function addToList(e) {
      if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
+        matches++;
+        if (matches === 8) {
+           setTimeout(displayFinalScore, 1000);
+        }
         //empty card list
         addStars();
         numMoves++;
@@ -137,6 +148,7 @@ deck.addEventListener('click', function(e) {
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
  openCardsList = [];
+ matches = 0;
  numMoves = 0;
  numMovesDisplay.innerText = numMoves;
  removeCards();
