@@ -116,6 +116,13 @@ function addStars() {
   starsPanel.appendChild(li).setAttribute("class", "fa fa-star");
 }
 
+//Remove Stars from display
+function removeStars() {
+   while (starsPanel.firstChild) {
+     starsPanel.removeChild(starsPanel.firstChild);
+ }
+}
+
 //Display number of Moves
 let numMovesDisplay = document.querySelector('.moves');
 numMoves = 0;
@@ -133,6 +140,7 @@ repeatButton.addEventListener('click', function(){
  numMoves = 0;
  numMovesDisplay.innerText = numMoves;
  removeCards();
+ removeStars();
  layoutCards();
 });
 
