@@ -101,7 +101,7 @@ function displayFinalScore() {
    modal.style.display = "block";
    p.appendChild(textNode);
    modalContent.appendChild(p);
-   let buttonText = document.createTextNode("Close");
+   let buttonText = document.createTextNode("Play again?");
    button.appendChild(buttonText);
    modalContent.appendChild(button);
 }
@@ -214,6 +214,17 @@ function resetClock() {
  appendMinutes.innerHTML = minutes;
 }
 
+//function to reset game
+function resetGame() {
+   resetClock();
+ emptyCardList();
+ matches = 0;
+ numMoves = 0;
+ numMovesDisplay.innerText = numMoves;
+ removeCards();
+ layoutCards();
+}
+
 // Get the modal
 let modal = document.getElementById('myModal');
 
@@ -231,18 +242,13 @@ deck.addEventListener('click', function(e) {
 
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
-   resetClock();
- emptyCardList();
- matches = 0;
- numMoves = 0;
- numMovesDisplay.innerText = numMoves;
- removeCards();
- layoutCards();
+   resetGame();
 });
 
 //event listener for closing modal
 button.addEventListener('click', function(){
    modal.style.display = "none";
+   resetGame();
 })
 
 
