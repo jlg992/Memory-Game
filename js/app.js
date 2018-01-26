@@ -89,7 +89,8 @@ function addToList(e) {
    openCardsList.push(e.target);
    //Check for matches
    if (openCardsList.length === 2) {
-     if (openCardsList[0].firstChild.getAttribute('class') === openCardsList[1].firstChild.getAttribute('class')) {
+     if (openCardsList[0].firstChild.getAttribute('class')
+        === openCardsList[1].firstChild.getAttribute('class')) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
         matches++;
@@ -97,7 +98,7 @@ function addToList(e) {
            setTimeout(displayFinalScore, 1000);
         }
         incrementMoves();
-        openCardsList = [];
+        emptyCardList();
      }
      else {
        //hide cards that don't match
@@ -107,21 +108,85 @@ function addToList(e) {
         openCardsList[1].classList.remove('show');
         openCardsList[1].classList.remove('open');
         incrementMoves();
-        openCardsList = [];
+        emptyCardList();
       }, 1000);
      }
    }
  }
 }
 
-
-
-
-
 //Increment number of moves
 function incrementMoves() {
    numMoves++;
    numMovesDisplay.innerText = numMoves;
+}
+
+//Empty cards list
+function emptyCardList() {
+   openCardsList = [];
+}
+
+//Record the length of a game
+let seconds = 00;
+let mseconds = 00;
+let minutes = 00;
+let appendMseconds = document.getElementById("mseconds")
+let appendSeconds = document.getElementById("seconds");
+let appendMinutes = document.getElementById("minutes");
+let Interval;
+
+function startTimer () {
+ mseconds++;
+
+ if(mseconds < 9){
+   appendMseconds.innerHTML = "0" + mseconds;
+ }
+
+ if (mseconds > 9){
+   appendMseconds.innerHTML = mseconds;
+ }
+
+ if (mseconds > 99) {
+   console.log("seconds");
+   seconds++;
+   appendSeconds.innerHTML = "0" + seconds;
+   mseconds = 0;
+   appendMseconds.innerHTML = "0" + 0;
+ }
+
+ if (seconds > 9){
+   appendSeconds.innerHTML = seconds;
+ }
+
+ if (seconds > 59) {
+   console.log("minutes");
+   minutes++;
+   appendMinutes.innerHTML = "0" + minutes;
+   seconds = 0;
+   appendSeconds.innerHTML = "0" + 0;
+ }
+
+}
+
+function startClock() {
+   clearInterval(Interval);
+   Interval = setInterval(startTimer, 10);
+}
+
+
+function stopClock() {
+   clearInterval(Interval);
+}
+
+
+function resetClock() {
+   clearInterval(Interval);
+  mseconds = "00";
+ seconds = "00";
+ minutes = "00";
+  appendMseconds.innerHTML = mseconds;
+ appendSeconds.innerHTML = seconds;
+ appendMinutes.innerHTML = minutes;
 }
 
 //Display number of Moves
@@ -131,13 +196,15 @@ numMovesDisplay.innerText = numMoves;
 
 
 deck.addEventListener('click', function(e) {
+  startClock();
   displaySymbol(e);
   addToList(e);
 });
 
 //set up event listener for resetting deck layout
 repeatButton.addEventListener('click', function(){
- openCardsList = [];
+   resetClock();
+ emptyCardList();
  matches = 0;
  numMoves = 0;
  numMovesDisplay.innerText = numMoves;
