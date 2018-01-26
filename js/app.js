@@ -95,11 +95,16 @@ function displaySymbol(e) {
 //Display Final score
 let p = document.createElement("p");
 let button = document.createElement("button");
+let br = document.createElement("br");
 let modalContent = document.querySelector('.modal-content');
+let timeStamp = document.querySelector(".timer");
 function displayFinalScore() {
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
+   let textTimeNode  = document.createTextNode(`Time: ${timeStamp.innerText}s`);
    modal.style.display = "block";
    p.appendChild(textNode);
+   p.appendChild(br);
+   p.appendChild(textTimeNode);
    modalContent.appendChild(p);
    let buttonText = document.createTextNode("Play again?");
    button.appendChild(buttonText);
