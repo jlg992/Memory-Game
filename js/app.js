@@ -78,8 +78,13 @@ function displaySymbol(e) {
 }
 
 //Display Final score
+let p = document.createElement("p");
+let modalContent = document.querySelector('.modal-content');
 function displayFinalScore() {
-   alert(`You matched all the cards in ${numMoves} moves.`)
+   let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
+   modal.style.display = "block";
+   p.appendChild(textNode);
+   modalContent.appendChild(p);
 }
 
 //Add cards to list of open cards
@@ -189,6 +194,9 @@ function resetClock() {
  appendSeconds.innerHTML = seconds;
  appendMinutes.innerHTML = minutes;
 }
+
+// Get the modal
+let modal = document.getElementById('myModal');
 
 //Display number of Moves
 let numMovesDisplay = document.querySelector('.moves');
