@@ -192,17 +192,18 @@ function startTimer () {
 
 }
 
+//function to start the timer
 function startClock() {
    clearInterval(Interval);
    Interval = setInterval(startTimer, 10);
 }
 
-
+//function to stop the timer
 function stopClock() {
    clearInterval(Interval);
 }
 
-
+//function to reset the timer to 00:00:00
 function resetClock() {
    clearInterval(Interval);
   mseconds = "00";
@@ -221,7 +222,7 @@ let numMovesDisplay = document.querySelector('.moves');
 numMoves = 0;
 numMovesDisplay.innerText = numMoves;
 
-
+//event listener to start the game/timer
 deck.addEventListener('click', function(e) {
   startClock();
   displaySymbol(e);
@@ -239,6 +240,7 @@ repeatButton.addEventListener('click', function(){
  layoutCards();
 });
 
+//event listener for closing modal
 button.addEventListener('click', function(){
    modal.style.display = "none";
 })
