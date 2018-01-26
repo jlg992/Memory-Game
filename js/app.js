@@ -95,6 +95,7 @@ function addToList(e) {
         openCardsList[1].classList.add('match');
         matches++;
         if (matches === 8) {
+           stopClock();
            setTimeout(displayFinalScore, 1000);
         }
         incrementMoves();
