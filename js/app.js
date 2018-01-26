@@ -79,12 +79,16 @@ function displaySymbol(e) {
 
 //Display Final score
 let p = document.createElement("p");
+let button = document.createElement("button");
 let modalContent = document.querySelector('.modal-content');
 function displayFinalScore() {
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
    modal.style.display = "block";
    p.appendChild(textNode);
    modalContent.appendChild(p);
+   let buttonText = document.createTextNode("Close");
+   button.appendChild(buttonText);
+   modalContent.appendChild(button);
 }
 
 //Add cards to list of open cards
