@@ -157,7 +157,6 @@ function startTimer () {
  }
 
  if (mseconds > 99) {
-   console.log("seconds");
    seconds++;
    appendSeconds.innerHTML = "0" + seconds;
    mseconds = 0;
@@ -169,7 +168,6 @@ function startTimer () {
  }
 
  if (seconds > 59) {
-   console.log("minutes");
    minutes++;
    appendMinutes.innerHTML = "0" + minutes;
    seconds = 0;
@@ -224,6 +222,10 @@ repeatButton.addEventListener('click', function(){
  removeCards();
  layoutCards();
 });
+
+button.addEventListener('click', function(){
+   modal.style.display = "none";
+})
 
 
 layoutCards();
