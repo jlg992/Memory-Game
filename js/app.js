@@ -93,7 +93,9 @@ function displaySymbol(e) {
 }
 
 //Display Final score
-let p = document.createElement("p");
+let p1 = document.createElement("p");
+let p2 = document.createElement("p");
+let p3 = document.createElement("p");
 let button = document.createElement("button");
 let br = document.createElement("br");
 let modalContent = document.querySelector('.modal-content');
@@ -101,11 +103,14 @@ let timeStamp = document.querySelector(".timer");
 function displayFinalScore() {
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
    let textTimeNode  = document.createTextNode(`Time: ${timeStamp.innerText}s`);
+   let textStarNode = document.createTextNode('Star Rating:')
    modal.style.display = "block";
-   p.appendChild(textNode);
-   p.appendChild(br);
-   p.appendChild(textTimeNode);
-   modalContent.appendChild(p);
+   p1.appendChild(textNode);
+   p2.appendChild(textTimeNode);
+   p3.appendChild(textStarNode);
+   modalContent.appendChild(p1);
+   modalContent.appendChild(p2);
+   modalContent.appendChild(p3);
    let buttonText = document.createTextNode("Play again?");
    button.appendChild(buttonText);
    modalContent.appendChild(button);
