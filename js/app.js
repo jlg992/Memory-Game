@@ -48,6 +48,16 @@ function removeStar() {
 }
 
 
+//Function to check number of moves
+function checkMoveNumber(numberOfMoves) {
+   if (numberOfMoves === 16) {
+      removeStar();
+   }
+   else if (numberOfMoves === 26) {
+      removeStar();
+   }
+}
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -113,6 +123,7 @@ function addToList(e) {
            setTimeout(displayFinalScore, 1000);
         }
         incrementMoves();
+        checkMoveNumber(numMoves);
         emptyCardList();
      }
      else {
