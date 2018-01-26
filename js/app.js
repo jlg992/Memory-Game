@@ -41,6 +41,11 @@ function removeCards() {
     }
 }
 
+//Selector for ul with the stars
+const starsPanel = document.querySelector('.stars');
+function removeStar() {
+   starsPanel.removeChild(starsPanel.firstElementChild);
+}
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
