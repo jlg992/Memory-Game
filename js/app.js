@@ -104,10 +104,12 @@ function displayFinalScore() {
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
    let textTimeNode  = document.createTextNode(`Time: ${timeStamp.innerText}s`);
    let textStarNode = document.createTextNode('Star Rating:')
+   let currentNumStars = document.querySelector(".stars");
    modal.style.display = "block";
    p1.appendChild(textNode);
    p2.appendChild(textTimeNode);
    p3.appendChild(textStarNode);
+   p3.appendChild(currentNumStars);
    modalContent.appendChild(p1);
    modalContent.appendChild(p2);
    modalContent.appendChild(p3);
@@ -144,6 +146,7 @@ function addToList(e) {
         openCardsList[1].classList.remove('show');
         openCardsList[1].classList.remove('open');
         incrementMoves();
+        checkMoveNumber(numMoves);
         emptyCardList();
       }, 1000);
      }
