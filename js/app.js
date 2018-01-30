@@ -125,7 +125,11 @@ function addToList(e) {
    openCardsList.push(e.target);
    //Check for matches
    if (openCardsList.length === 2) {
-     if (openCardsList[0].firstChild.getAttribute('class')
+      if (openCardsList[0] === openCardsList[1]) {
+         openCardsList.pop();
+         return;
+      }
+     else if (openCardsList[0].firstChild.getAttribute('class')
         === openCardsList[1].firstChild.getAttribute('class')) {
         openCardsList[0].classList.add('match');
         openCardsList[1].classList.add('match');
@@ -229,13 +233,13 @@ function resetClock() {
 
 //function to reset game
 function resetGame() {
-   resetClock();
- emptyCardList();
- matches = 0;
- numMoves = 0;
- numMovesDisplay.innerText = numMoves;
- removeCards();
- layoutCards();
+  resetClock();
+  emptyCardList();
+  matches = 0;
+  numMoves = 0;
+  numMovesDisplay.innerText = numMoves;
+  removeCards();
+  layoutCards();
 }
 
 // Get the modal
