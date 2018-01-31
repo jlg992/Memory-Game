@@ -7,6 +7,28 @@ const deck = document.querySelector('.deck');
 // Select button for reshuffling and laying out cards
 const repeatButton = document.querySelector('.fa-repeat');
 
+const scorePanel = document.querySelector('.score-panel');
+
+//Set number of starting current
+
+console.log(scorePanel.childNodes)
+function resetStars() {
+   if (scorePanel.childNodes.length === 7) {
+      console.log(scorePanel.childNodes)
+      let starPanel = document.querySelector(".stars");
+      while (starsPanel.firstChild) {
+        starsPanel.removeChild(starsPanel.firstChild);
+     }
+      let li1 = document.createElement("li");
+      let li2 = document.createElement("li");
+      let li3 = document.createElement("li");
+     starsPanel.appendChild(li1).setAttribute("class", "fa fa-star");
+     starsPanel.appendChild(li2).setAttribute("class", "fa fa-star");
+     starsPanel.appendChild(li3).setAttribute("class", "fa fa-star");
+   }
+   console.log(scorePanel.childNodes)
+}
+
 /*
  * Create a list that holds all of your cards
  */
@@ -109,7 +131,7 @@ function displayFinalScore() {
    p1.appendChild(textNode);
    p2.appendChild(textTimeNode);
    p3.appendChild(textStarNode);
-   p3.appendChild(currentNumStars);
+   // p3.appendChild(currentNumStars);
    modalContent.appendChild(p1);
    modalContent.appendChild(p2);
    modalContent.appendChild(p3);
@@ -234,12 +256,16 @@ function resetClock() {
 //function to reset game
 function resetGame() {
   resetClock();
+  resetStars();
   emptyCardList();
   matches = 0;
   numMoves = 0;
   numMovesDisplay.innerText = numMoves;
   removeCards();
   layoutCards();
+  while (modalContent.firstChild) {
+       modalContent.removeChild(modalContent.firstChild);
+   }
 }
 
 // Get the modal
