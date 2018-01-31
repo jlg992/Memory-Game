@@ -115,14 +115,14 @@ function displaySymbol(e) {
 }
 
 //Display Final score
-let p1 = document.createElement("p");
-let p2 = document.createElement("p");
-let p3 = document.createElement("p");
-let button = document.createElement("button");
-let br = document.createElement("br");
-let modalContent = document.querySelector('.modal-content');
-let timeStamp = document.querySelector(".timer");
 function displayFinalScore() {
+   let button = document.createElement("button");
+   let br = document.createElement("br");
+   let modalContent = document.querySelector('.modal-content');
+   let timeStamp = document.querySelector(".timer");
+   let p1 = document.createElement("p");
+   let p2 = document.createElement("p");
+   let p3 = document.createElement("p");
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
    let textTimeNode  = document.createTextNode(`Time: ${timeStamp.innerText}s`);
    let textStarNode = document.createTextNode('Star Rating:')
@@ -138,6 +138,11 @@ function displayFinalScore() {
    let buttonText = document.createTextNode("Play again?");
    button.appendChild(buttonText);
    modalContent.appendChild(button);
+   //event listener for closing modal
+   button.addEventListener('click', function(){
+      modal.style.display = "none";
+      resetGame();
+   })
 }
 
 //Add cards to list of open cards
@@ -253,19 +258,24 @@ function resetClock() {
  appendMinutes.innerHTML = minutes;
 }
 
+function clearModal() {
+   let modalContent = document.querySelector('.modal-content');
+   while (modalContent.firstChild) {
+        modalContent.removeChild(modalContent.firstChild);
+    }
+}
+
 //function to reset game
 function resetGame() {
   resetClock();
   resetStars();
   emptyCardList();
+  clearModal();
   matches = 0;
   numMoves = 0;
   numMovesDisplay.innerText = numMoves;
   removeCards();
   layoutCards();
-  while (modalContent.firstChild) {
-       modalContent.removeChild(modalContent.firstChild);
-   }
 }
 
 // Get the modal
@@ -288,11 +298,6 @@ repeatButton.addEventListener('click', function(){
    resetGame();
 });
 
-//event listener for closing modal
-button.addEventListener('click', function(){
-   modal.style.display = "none";
-   resetGame();
-})
 
 
 layoutCards();
