@@ -10,11 +10,8 @@ const repeatButton = document.querySelector('.fa-repeat');
 const scorePanel = document.querySelector('.score-panel');
 
 //Set number of starting current
-
-console.log(scorePanel.childNodes)
 function resetStars() {
    if (scorePanel.childNodes.length === 7) {
-      console.log(scorePanel.childNodes)
       let starPanel = document.querySelector(".stars");
       while (starsPanel.firstChild) {
         starsPanel.removeChild(starsPanel.firstChild);
@@ -26,7 +23,6 @@ function resetStars() {
      starsPanel.appendChild(li2).setAttribute("class", "fa fa-star");
      starsPanel.appendChild(li3).setAttribute("class", "fa fa-star");
    }
-   console.log(scorePanel.childNodes)
 }
 
 /*
@@ -131,6 +127,8 @@ function displayFinalScore() {
    p1.appendChild(textNode);
    p2.appendChild(textTimeNode);
    p3.appendChild(textStarNode);
+   let starsPanelClone = starsPanel.cloneNode(true);
+   p3.appendChild(starsPanelClone);
    // p3.appendChild(currentNumStars);
    modalContent.appendChild(p1);
    modalContent.appendChild(p2);
