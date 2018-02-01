@@ -2,17 +2,59 @@
 let matches = 0;
 
 // Select the ul for the cards
-const deck = document.querySelector('.deck');
+const deck = document.querySelector(".deck");
 
 // Select button for reshuffling and laying out cards
-const repeatButton = document.querySelector('.fa-repeat');
+const repeatButton = document.querySelector(".fa-repeat");
 
-const scorePanel = document.querySelector('.score-panel');
+const scorePanel = document.querySelector(".score-panel");
+
+//Selector for ul with the stars
+const starsPanel = document.querySelector(".stars");
+/*
+ * Create a list that holds all of your cards
+ */
+const cardValues = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
+               "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf",
+               "fa fa-bicycle", "fa fa-diamond", "fa fa-bomb", "fa fa-leaf",
+               "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle",
+               "fa fa-paper-plane-o", "fa fa-cube"];
+
+let seconds = 0;
+let mseconds = 0;
+let minutes = 0;
+let appendMseconds = document.getElementById("mseconds")
+let appendSeconds = document.getElementById("seconds");
+let appendMinutes = document.getElementById("minutes");
+let Interval;
+let openCardsList = []; //list to hold open cards
+// Get the modal
+let modal = document.getElementById("myModal");
+
+//Display number of Moves
+let numMovesDisplay = document.querySelector(".moves");
+let numMoves = 0;
+numMovesDisplay.innerText = numMoves;
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+function layoutCards() {
+    shuffle(cardValues);
+    for (let cardValue of cardValues) {
+        let li = document.createElement("li");
+        let i = document.createElement("i");
+        deck.appendChild(li).setAttribute("class", "card");
+        li.appendChild(i).setAttribute("class", cardValue);
+    }
+}
 
 //Set number of starting current
 function resetStars() {
    if (scorePanel.childNodes.length === 7) {
-      let starPanel = document.querySelector(".stars");
       while (starsPanel.firstChild) {
         starsPanel.removeChild(starsPanel.firstChild);
      }
@@ -25,33 +67,6 @@ function resetStars() {
    }
 }
 
-/*
- * Create a list that holds all of your cards
- */
-const cardValues = ["fa fa-diamond", "fa fa-paper-plane-o", "fa fa-anchor",
-               "fa fa-bolt", "fa fa-cube", "fa fa-anchor", "fa fa-leaf",
-               "fa fa-bicycle", "fa fa-diamond", "fa fa-bomb", "fa fa-leaf",
-               "fa fa-bomb", "fa fa-bolt", "fa fa-bicycle",
-               "fa fa-paper-plane-o", "fa fa-cube"];
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-
-function layoutCards() {
-    shuffle(cardValues);
-    for (let cardValue of cardValues) {
-        let li = document.createElement("li");
-        let i = document.createElement('i');
-        deck.appendChild(li).setAttribute("class", "card");
-        li.appendChild(i).setAttribute("class", cardValue);
-    }
-}
-
 // Clear the cards
 function removeCards() {
     while (deck.firstChild) {
@@ -59,8 +74,7 @@ function removeCards() {
     }
 }
 
-//Selector for ul with the stars
-const starsPanel = document.querySelector('.stars');
+//Function to remove stars
 function removeStar() {
    starsPanel.removeChild(starsPanel.firstElementChild);
 }
@@ -105,31 +119,28 @@ function shuffle(array) {
 //Display the card's symbol
 function displaySymbol(e) {
  if (e.target.matches("li.card") && (openCardsList.length < 2)) {
-   e.target.classList.add('show');
-   e.target.classList.add('open');
+   e.target.classList.add("show");
+   e.target.classList.add("open");
  }
 }
 
 //Display Final score
 function displayFinalScore() {
    let button = document.createElement("button");
-   let br = document.createElement("br");
-   let modalContent = document.querySelector('.modal-content');
+   let modalContent = document.querySelector(".modal-content");
    let timeStamp = document.querySelector(".timer");
    let p1 = document.createElement("p");
    let p2 = document.createElement("p");
    let p3 = document.createElement("p");
    let textNode  = document.createTextNode(`You matched all the cards in ${numMoves} moves.`);
    let textTimeNode  = document.createTextNode(`Time: ${timeStamp.innerText}s`);
-   let textStarNode = document.createTextNode('Star Rating:')
-   let currentNumStars = document.querySelector(".stars");
+   let textStarNode = document.createTextNode("Star Rating:")
    modal.style.display = "block";
    p1.appendChild(textNode);
    p2.appendChild(textTimeNode);
    p3.appendChild(textStarNode);
    let starsPanelClone = starsPanel.cloneNode(true);
    p3.appendChild(starsPanelClone);
-   // p3.appendChild(currentNumStars);
    modalContent.appendChild(p1);
    modalContent.appendChild(p2);
    modalContent.appendChild(p3);
@@ -137,14 +148,13 @@ function displayFinalScore() {
    button.appendChild(buttonText);
    modalContent.appendChild(button);
    //event listener for closing modal
-   button.addEventListener('click', function(){
+   button.addEventListener("click", function(){
       modal.style.display = "none";
       resetGame();
    })
 }
 
 //Add cards to list of open cards
-let openCardsList = []; //list to hold open cards
 function addToList(e) {
  if (e.target.matches("li.card") && (openCardsList.length < 2)) {
    openCardsList.push(e.target);
@@ -154,10 +164,10 @@ function addToList(e) {
          openCardsList.pop();
          return;
       }
-     else if (openCardsList[0].firstChild.getAttribute('class')
-        === openCardsList[1].firstChild.getAttribute('class')) {
-        openCardsList[0].classList.add('match');
-        openCardsList[1].classList.add('match');
+     else if (openCardsList[0].firstChild.getAttribute("class")
+        === openCardsList[1].firstChild.getAttribute("class")) {
+        openCardsList[0].classList.add("match");
+        openCardsList[1].classList.add("match");
         matches++;
         if (matches === 8) {
            stopClock();
@@ -170,10 +180,10 @@ function addToList(e) {
      else {
        //hide cards that don't match
        setTimeout(function hideCards() {
-        openCardsList[0].classList.remove('show');
-        openCardsList[0].classList.remove('open');
-        openCardsList[1].classList.remove('show');
-        openCardsList[1].classList.remove('open');
+        openCardsList[0].classList.remove("show");
+        openCardsList[0].classList.remove("open");
+        openCardsList[1].classList.remove("show");
+        openCardsList[1].classList.remove("open");
         incrementMoves();
         checkMoveNumber(numMoves);
         emptyCardList();
@@ -194,44 +204,35 @@ function emptyCardList() {
    openCardsList = [];
 }
 
-//Record the length of a game
-let seconds = 00;
-let mseconds = 00;
-let minutes = 00;
-let appendMseconds = document.getElementById("mseconds")
-let appendSeconds = document.getElementById("seconds");
-let appendMinutes = document.getElementById("minutes");
-let Interval;
-
+//Function to record the length of a game
 function startTimer () {
- mseconds++;
+   mseconds++;
 
- if(mseconds < 9){
-   appendMseconds.innerHTML = "0" + mseconds;
- }
+   if(mseconds < 9){
+      appendMseconds.innerHTML = "0" + mseconds;
+   }
 
- if (mseconds > 9){
-   appendMseconds.innerHTML = mseconds;
- }
+   if (mseconds > 9){
+      appendMseconds.innerHTML = mseconds;
+   }
 
- if (mseconds > 99) {
-   seconds++;
-   appendSeconds.innerHTML = "0" + seconds;
-   mseconds = 0;
-   appendMseconds.innerHTML = "0" + 0;
- }
+   if (mseconds > 99) {
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      mseconds = 0;
+      appendMseconds.innerHTML = "0" + 0;
+   }
 
- if (seconds > 9){
-   appendSeconds.innerHTML = seconds;
- }
+   if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+   }
 
- if (seconds > 59) {
-   minutes++;
-   appendMinutes.innerHTML = "0" + minutes;
-   seconds = 0;
-   appendSeconds.innerHTML = "0" + 0;
- }
-
+   if (seconds > 59) {
+      minutes++;
+      appendMinutes.innerHTML = "0" + minutes;
+      seconds = 0;
+      appendSeconds.innerHTML = "0" + 0;
+   }
 }
 
 //function to start the timer
@@ -248,16 +249,16 @@ function stopClock() {
 //function to reset the timer to 00:00:00
 function resetClock() {
    clearInterval(Interval);
-  mseconds = "00";
- seconds = "00";
- minutes = "00";
-  appendMseconds.innerHTML = mseconds;
- appendSeconds.innerHTML = seconds;
- appendMinutes.innerHTML = minutes;
+   mseconds = "00";
+   seconds = "00";
+   minutes = "00";
+   appendMseconds.innerHTML = mseconds;
+   appendSeconds.innerHTML = seconds;
+   appendMinutes.innerHTML = minutes;
 }
-
+//Clear modal content
 function clearModal() {
-   let modalContent = document.querySelector('.modal-content');
+   let modalContent = document.querySelector(".modal-content");
    while (modalContent.firstChild) {
         modalContent.removeChild(modalContent.firstChild);
     }
@@ -265,37 +266,27 @@ function clearModal() {
 
 //function to reset game
 function resetGame() {
-  resetClock();
-  resetStars();
-  emptyCardList();
-  clearModal();
-  matches = 0;
-  numMoves = 0;
-  numMovesDisplay.innerText = numMoves;
-  removeCards();
-  layoutCards();
+   resetClock();
+   resetStars();
+   emptyCardList();
+   clearModal();
+   matches = 0;
+   numMoves = 0;
+   numMovesDisplay.innerText = numMoves;
+   removeCards();
+   layoutCards();
 }
 
-// Get the modal
-let modal = document.getElementById('myModal');
-
-//Display number of Moves
-let numMovesDisplay = document.querySelector('.moves');
-numMoves = 0;
-numMovesDisplay.innerText = numMoves;
-
 //event listener to start the game/timer
-deck.addEventListener('click', function(e) {
-  startClock();
-  displaySymbol(e);
-  addToList(e);
+deck.addEventListener("click", function(e) {
+   startClock();
+   displaySymbol(e);
+   addToList(e);
 });
 
 //set up event listener for resetting deck layout
-repeatButton.addEventListener('click', function(){
+repeatButton.addEventListener("click", function(){
    resetGame();
 });
-
-
 
 layoutCards();
